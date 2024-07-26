@@ -1,6 +1,7 @@
 import React from 'react'
 import { Editor } from "@tinymce/tinymce-react"
 import { Controller } from "react-hook-form"
+import conf from "../../conf/consf"
 export default function RTE({ name, control, label, defaultValue = '' }) {
     return (
         <div className='md:w-full w-screen  mt-10'>
@@ -12,7 +13,7 @@ export default function RTE({ name, control, label, defaultValue = '' }) {
                 render={({ field: { onChange } }) => (
                     <Editor
                         initialValue={defaultValue}
-                        apiKey={import.meta.env.VITE_EDITOR_API_KEY}
+                        apiKey={conf.tinymceapikey}
                         init={{
                             initialValue: defaultValue,
                             height: 500,
