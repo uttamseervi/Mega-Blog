@@ -11,12 +11,13 @@ const Signup = () => {
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
     const [error, setError] = useState('');
-    const[loading,setLoading]=useState(false)
+    const [loading, setLoading] = useState(false)
 
     const create = async (data) => {
-        console.log("The signup data is  :-->>",data)
+        console.log("The signup data is  :-->>", data)
         setError("");
         try {
+            setLoading(true)
             const session = await authService.createAccount(data)
             console.log("the session from the signup is: ", session)
             if (session) {
@@ -27,8 +28,10 @@ const Signup = () => {
         } catch (error) {
             setError(error.message)
         }
+        finally {
+            setLoading(false)
+        }
     }
-
 
 
 
@@ -82,7 +85,11 @@ const Signup = () => {
                             })}
                         />
                         <Button type="submit" className="w-full">
-                            Create Account
+                            {loading ? (
+                                <span className="loading loading-spinner loading-lg"></span>
+                            ) : (
+                                " Create Account"
+                            )}
                         </Button>
                     </div>
                 </form>

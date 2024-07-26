@@ -20,7 +20,7 @@ const EditPost = () => {
 
 
     return (
-        <div>{
+        <div className=' mt-24'>{
             post ? (
                 <div>
                     <Container>

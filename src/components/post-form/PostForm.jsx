@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from "react-hook-form"
 import { Button, Input, Select, RTE } from "../index"
 import appwriteService from "../../appwrite/config"
@@ -15,6 +15,7 @@ function PostForm({ post }) {
             status: post?.status || "active",
         }
     });
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData)
     console.log(userData)
@@ -74,11 +75,14 @@ function PostForm({ post }) {
         })
         return () => subscription.unsubscribe()
     }, [watch, slugTransform, setValue])
+    setTimeout(() => {
+        setLoading(false)
+    }, 2500);
 
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-            <div className="w-2/3 px-2">
+        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap ">
+            <div className="md:w-2/3 w-full md:px-2">
                 <Input
                     label="Title :"
                     placeholder="Title"
@@ -94,13 +98,15 @@ function PostForm({ post }) {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
-                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+                <div className='w-full ml-[-15px]'>  
+                    <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+                </div>
             </div>
-            <div className="w-1/3 px-2">
+            <div className="md:w-1/3 w-4/5 px-2">
                 <Input
                     label="Featured Image :"
                     type="file"
-                    className="mb-4"
+                    className="mb-4 mt-2"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {...register("image", { required: !post })}
                 />
@@ -116,11 +122,11 @@ function PostForm({ post }) {
                 <Select
                     options={["active", "inactive"]}
                     label="Status"
-                    className="mb-4"
+                    className="mb-4 bg-rose-50 ml-2 p-1"
                     {...register("status", { required: true })}
                 />
                 <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
-                    {post ? "Update" : "Submit"}
+                    {loading ? (post ? "Updating" : "Submitting") : (post ? "Update" : "Submit")}
                 </Button>
             </div>
         </form>

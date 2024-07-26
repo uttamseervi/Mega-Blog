@@ -40,15 +40,15 @@ function Header() {
 
 
     return (
-        <header className='py-3 shadow bg-rose-50'>
+        <header className='py-3 shadow bg-transparent backdrop-blur-md  w-full'>
             <Container>
-                <nav className='flex'>
-                    <div className='h-12 mt-0'>
+                <nav className='flex '>
+                    <div className='h-12 mt-0 md:block hidden'>
                         {/* <Link to='/'>
                             <img src={logo} className='w-[200px] h-[90px]' alt="" />
 
                         </Link> */}
-                        <h2 className='font-semibold text-2xl mt-3 font-mono'>Mega Blog</h2>
+                        <h2 className='font-semibold text-2xl mt-3 '>Mega Blog</h2>
                     </div>
                     <ul className='flex ml-auto'>
                         {navItems.map((item) =>
@@ -56,7 +56,7 @@ function Header() {
                                 <li key={item.name}>
                                     <button
                                         onClick={() => navigate(item.slug)}
-                                        className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
+                                        className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full text-black'
                                     >{item.name}</button>
                                 </li>
                             ) : null

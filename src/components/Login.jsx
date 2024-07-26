@@ -11,14 +11,16 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const { register, handleSubmit } = useForm()
+
     /* here in the above handleSubmit is not only the method it is a keyword we cannot directly use this to handle onSubmit instead we need to give it as handleSubmit(methodName) the methodName here is login so we give it like handleSubmit(login) "things to remember"*/
     const [error, setError] = useState('')
-
-    const login = async (data) => {
+    const [loading, setLoading] = useState(false)
+    const handleLogin = async (data) => {
         // the data here is coming from  what we have spread in the register so remember this
 
         setError("")
         try {
+            setLoading(true)
             const session = await authService.login(data);
             console.log("the session from the login is: ", session)
             if (session) {
@@ -29,6 +31,9 @@ const Login = () => {
             }
         } catch (error) {
             setError(error.message)
+        }
+        finally {
+            setLoading(false)
         }
     }
 
@@ -57,7 +62,7 @@ const Login = () => {
                 </p>
                 {error && <p className='text-red-600 text-center mt-8'>{error}</p>}
                 {/* above the comment is written for the below syntax we are using react-forms */}
-                <form onSubmit={handleSubmit(login)} className='mt-8'>
+                <form onSubmit={handleSubmit(handleLogin)} className='mt-8'>
                     <div className='space-y-5'>
                         <Input
                             label="Email: "
@@ -84,7 +89,13 @@ const Login = () => {
                                 // maxLength: 8,
                             })}
                         />
-                        <Button type="submit" className='w-full' >Sign in</Button>
+                        <Button type="submit" className="w-full">
+                            {loading ? (
+                                <span className="loading loading-spinner loading-lg"></span>
+                            ) : (
+                                " Login"
+                            )}
+                        </Button>
                     </div>
                 </form>
             </div>

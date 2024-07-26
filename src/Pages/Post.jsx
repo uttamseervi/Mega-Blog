@@ -12,7 +12,10 @@ export default function Post() {
 
     const userData = useSelector((state) => state.auth.userData);
 
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    const isAuthor = post && userData ? post.userId === userData.userData.$id : false;
+    // console.log("the userData from post is ", userData.userData.$id)
+    // console.log("the author from post is ", post.userId)
+    // console.log("the is author is : ", isAuthor)
 
     useEffect(() => {
         if (slug) {
@@ -33,7 +36,7 @@ export default function Post() {
     };
 
     return post ? (
-        <div className="py-8">
+        <div className="py-8  mt-24">
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
