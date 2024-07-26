@@ -5,7 +5,7 @@ import { FaHeart } from "react-icons/fa6";
 
 
 function PostCard({ post }) {
-    console.log("the post is ",post)
+    // console.log("the post is ",post)
     const date = new Date(post.$createdAt).toLocaleDateString('en-US')
 
     return (

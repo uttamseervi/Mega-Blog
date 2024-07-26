@@ -7,7 +7,7 @@ function Home() {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true)
     const authStatus = useSelector((state) => state.auth?.isAuthenticated)
-    console.log("The authstatus from : home is ", authStatus)
+    // console.log("The authstatus from : home is ", authStatus)
 
     useEffect(() => {
 

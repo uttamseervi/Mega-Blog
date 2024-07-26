@@ -22,7 +22,7 @@ const Login = () => {
         try {
             setLoading(true)
             const session = await authService.login(data);
-            console.log("the session from the login is: ", session)
+            // console.log("the session from the login is: ", session)
             if (session) {
                 const userData = await authService.getCurrentUser()
                 console.log("The user data is: ", userData)

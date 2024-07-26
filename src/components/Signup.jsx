@@ -14,12 +14,12 @@ const Signup = () => {
     const [loading, setLoading] = useState(false)
 
     const create = async (data) => {
-        console.log("The signup data is  :-->>", data)
+        // console.log("The signup data is  :-->>", data)
         setError("");
         try {
             setLoading(true)
             const session = await authService.createAccount(data)
-            console.log("the session from the signup is: ", session)
+            // console.log("the session from the signup is: ", session)
             if (session) {
                 const userData = await authService.getCurrentUser();
                 if (userData) dispatch(login(userData));
